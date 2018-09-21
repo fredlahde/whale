@@ -18,16 +18,15 @@ pub struct DockerClient {
 
 impl DockerClient {
     pub fn new(addr: &str) -> Result<DockerClient, WhaleError> {
-        let socket = match UnixStream::connect(addr) {
-            Ok(s) => s,
+        match UnixStream::connect(addr) {
+            Ok(s) => Ok(DockerClient { socket: s }),
             Err(e) => {
-                return Err(WhaleError::ConnectError {
+                Err(WhaleError::ConnectError {
                     addr: String::from(addr),
                     e: e.to_string(),
-                });
+                })
             }
-        };
-        Ok(DockerClient { socket: socket })
+        }
     }
 
     pub fn request(&mut self, req: &str) -> Result<Vec<u8>, WhaleError> {
