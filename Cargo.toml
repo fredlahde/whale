@@ -1,0 +1,11 @@
+[package]
+name = "whale"
+version = "0.1.0"
+authors = ["fred <fredlahde@gmail.com>"]
+
+[dependencies]
+serde_derive = "1.0.66"
+serde = "1.0.66"
+serde_json = "1.0.21"
+tokio = "0.1.8"
+failure = "0.1.2"
