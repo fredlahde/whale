@@ -12,8 +12,10 @@ fn main() {
         }
     };
 
-    match client.request_to_string("foo\n") {
+    match client.get_all_container() {
         Err(e) => eprintln!("{}", e),
-        Ok(s) => println!("{}", s),
+        Ok(s) => {
+            s.into_iter().map(|c| c.id).for_each(|id| println!("id: {}", id));
+        },
     };
 }
